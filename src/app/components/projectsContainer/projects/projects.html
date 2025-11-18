@@ -1,0 +1,35 @@
+<div class="p-4">
+  <mat-toolbar class="!p-0 !my-7 !h-full">
+    <div class="w-full flex flex-col items-start gap-4 sm:flex-row sm:justify-between">
+      <form class="w-[60%] min-w-[300px]">
+        <div class="flex items-center p-1 rounded-sm border">
+          <mat-icon class="opacity-60">search</mat-icon>
+          <input
+            type="search"
+            placeholder="Search projects..."
+            class="text-sm p-1 outline-none placeholder:opacity-60 flex-1"
+          />
+        </div>
+      </form>
+
+      <!-- <div class="text-sm">
+                <label>Sort by: </label>
+                <a href="" class="underline font-bold" (click)="sortByDueDate($event)" [ngClass]="{'text-blue-600': active()}">Due date</a>
+            </div> -->
+
+      <button matButton="filled" (click)="openNewProjectDialog()">
+        New Project
+        <mat-icon fontIcon="add_circle"></mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="mt-7">
+    <h2 class="font-bold text-2xl">Projects</h2>
+    <p class="mb-7 text-gray-500">Manage and track your projects</p>
+
+    <app-priority-status />
+
+    <app-project-card />
+  </div>
+</div>

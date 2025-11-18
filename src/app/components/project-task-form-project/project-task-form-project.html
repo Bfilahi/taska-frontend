@@ -1,0 +1,56 @@
+<div class="flex flex-col p-2" [style.background]="'var(--mat-sys-surface-container-highest)'">
+  <button matIconButton matDialogClose class="self-end">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
+  <h2 matDialogTitle class="!font-bold">{{ header() }}</h2>
+  <mat-dialog-content>
+    <p>
+      <mat-form-field class="w-full">
+        <mat-label>{{ type() | titlecase }} Name</mat-label>
+        <input matInput placeholder="Enter {{ type() }} name" value="{{ taskName() }}" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="w-full">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder="Describe your {{ type() }}"
+          value="{{ taskDescription() }}"
+        ></textarea>
+      </mat-form-field>
+    </p>
+    <div class="flex items-center justify-between flex-wrap gap-3 mt-7">
+      <p>
+        <mat-form-field>
+          <mat-label>Priority</mat-label>
+          <mat-select [(ngModel)]="taskPriority" [ngModelOptions]="{ standalone: true }">
+            @for (priority of priorities; track priority) {
+            <mat-option [value]="priority.value">{{ priority.viewValue }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="taskStatus" [ngModelOptions]="{ standalone: true }">
+            @for (s of status; track s) {
+            <mat-option [value]="s.value">{{ s.viewValue }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </p>
+    </div>
+    <p>
+      <ng-content></ng-content>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button matButton="filled">
+      {{ buttonName() }}
+      <mat-icon fontIcon="{{ icon() }}"></mat-icon>
+    </button>
+  </mat-dialog-actions>
+</div>

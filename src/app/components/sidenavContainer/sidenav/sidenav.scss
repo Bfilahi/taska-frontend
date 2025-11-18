@@ -1,0 +1,9 @@
+:host{
+    --mat-sidenav-container-shape: 0;
+    --mat-sidenav-container-divider-color: var(--mat-sys-secondary-container);
+    --mat-button-text-label-text-color: var(--mat-sys-inverse-surface);
+
+    .mdc-button{
+        justify-content: left;
+    }
+}

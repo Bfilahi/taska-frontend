@@ -1,0 +1,144 @@
+<mat-card appearance="outlined" class="min-h-[250px] min-w-fit flex-2">
+  <mat-card-header>
+    <mat-icon fontIcon="chat_bubble"></mat-icon>
+    <span class="ml-3 font-bold mb-7">Task Notes (2)</span>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="notes-container flex flex-col gap-3 min-h-[300px] h-[300px] overflow-y-scroll">
+      <div
+        class="note-container border rounded-md p-2 w-fit"
+        [style.border-color]="'var(--mat-sys-secondary-container)'"
+      >
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 min-w-6 min-h-6 rounded-xl font-bold grid place-items-center"
+              [style.background]="'var(--mat-extended-custom-color1-color)'"
+              [style.color]="'var(--mat-sys-surface-container)'"
+            >
+              A
+            </div>
+            <h4>Filahi</h4>
+          </div>
+          <small class="subtext text-[12px]">• 12 Nov 2025, 20:29</small>
+        </div>
+        <p class="note mt-3" [style.color]="'var(--mat-sys-on-surface-variant)'">
+          Some content here.
+        </p>
+      </div>
+      <div
+        class="note-container border rounded-md p-2 w-fit"
+        [style.border-color]="'var(--mat-sys-secondary-container)'"
+      >
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 min-w-6 min-h-6 rounded-xl font-bold grid place-items-center"
+              [style.background]="'var(--mat-extended-custom-color1-color)'"
+              [style.color]="'var(--mat-sys-surface-container)'"
+            >
+              A
+            </div>
+            <h4>Filahi</h4>
+          </div>
+          <small class="subtext text-[12px]">• 12 Nov 2025, 20:29</small>
+        </div>
+        <p class="note mt-3" [style.color]="'var(--mat-sys-on-surface-variant)'">
+          Some content here. And this is the second note.
+        </p>
+      </div>
+      <div
+        class="note-container border rounded-md p-2 w-fit"
+        [style.border-color]="'var(--mat-sys-secondary-container)'"
+      >
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 min-w-6 min-h-6 rounded-xl font-bold grid place-items-center"
+              [style.background]="'var(--mat-extended-custom-color1-color)'"
+              [style.color]="'var(--mat-sys-surface-container)'"
+            >
+              A
+            </div>
+            <h4>Filahi</h4>
+          </div>
+          <small class="subtext text-[12px]">• 12 Nov 2025, 20:29</small>
+        </div>
+        <p class="note mt-3" [style.color]="'var(--mat-sys-on-surface-variant)'">
+          Some content here.
+        </p>
+      </div>
+      <div
+        class="note-container border rounded-md p-2 w-fit"
+        [style.border-color]="'var(--mat-sys-secondary-container)'"
+      >
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 min-w-6 min-h-6 rounded-xl font-bold grid place-items-center"
+              [style.background]="'var(--mat-extended-custom-color1-color)'"
+              [style.color]="'var(--mat-sys-surface-container)'"
+            >
+              A
+            </div>
+            <h4>Filahi</h4>
+          </div>
+          <small class="subtext text-[12px]">• 12 Nov 2025, 20:29</small>
+        </div>
+        <p class="note mt-3" [style.color]="'var(--mat-sys-on-surface-variant)'">
+          Some content here.
+        </p>
+      </div>
+      <div
+        class="note-container border rounded-md p-2 w-fit"
+        [style.border-color]="'var(--mat-sys-secondary-container)'"
+      >
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 min-w-6 min-h-6 rounded-xl font-bold grid place-items-center"
+              [style.background]="'var(--mat-extended-custom-color1-color)'"
+              [style.color]="'var(--mat-sys-surface-container)'"
+            >
+              A
+            </div>
+            <h4>Filahi</h4>
+          </div>
+          <small class="subtext text-[12px]">• 12 Nov 2025, 20:29</small>
+        </div>
+        <p class="note mt-3">Some content here.</p>
+      </div>
+      <div
+        class="note-container border rounded-md p-2 w-fit"
+        [style.border-color]="'var(--mat-sys-secondary-container)'"
+      >
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 min-w-6 min-h-6 rounded-xl font-bold grid place-items-center"
+              [style.background]="'var(--mat-extended-custom-color1-color)'"
+              [style.color]="'var(--mat-sys-surface-container)'"
+            >
+              A
+            </div>
+            <h4>Filahi</h4>
+          </div>
+          <small class="subtext text-[12px]">• 12 Nov 2025, 20:29</small>
+        </div>
+        <p class="note mt-3" [style.color]="'var(--mat-sys-on-surface-variant)'">
+          Some content here.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-end gap-3 w-full p-2">
+      <textarea
+        matInput
+        placeholder="Write a note..."
+        class="flex-1 p-2 min-w-[50px] min-h-[50px] border rounded-md placeholder:text-[var(--mat-sys-on-surface-variant)]"
+        [style.border-color]="'var(--mat-sys-secondary-container)'"
+      ></textarea>
+      <button matButton="filled">Post</button>
+    </div>
+  </mat-card-content>
+</mat-card>

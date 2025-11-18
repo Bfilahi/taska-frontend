@@ -1,0 +1,22 @@
+<div class="p-4 sm:mx-7">
+  <mat-toolbar class="!h-full !p-0">
+    <div class="w-full my-7 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <h2 class="text-2xl !font-bold">Welcome back, {{ user() }}</h2>
+        <p class="subtext text-[15px]">Here's what's happening with your projects today</p>
+      </div>
+
+      <button matButton="filled" (click)="openNewProjectDialog()">
+        New Project
+        <mat-icon fontIcon="add_circle"></mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <app-analysis-card [cards]="cards" />
+
+  <div class="mt-7 flex flex-col gap-3 lg:flex-row">
+    <app-projects-table class="flex-3" />
+    <app-overdue-card />
+  </div>
+</div>

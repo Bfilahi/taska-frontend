@@ -1,0 +1,92 @@
+<div class="mt-7 flex flex-wrap items-start gap-4">
+  <div class="flex-3">
+    <mat-card appearance="outlined" class="p-4">
+      <mat-card-header>
+        <h2 class="font-bold text-[17px] pb-2">Project Details</h2>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="flex flex-col gap-3">
+          <form class="flex flex-col gap-5">
+            <mat-form-field>
+              <mat-label>Project name</mat-label>
+              <input matInput value="Kubernetes Migration" />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Description</mat-label>
+              <textarea matInput>
+Migrate the monolithic app infrastructure to Kubernetes for scalability.</textarea
+              >
+            </mat-form-field>
+
+            <div class="flex items-center flex-wrap gap-3 mt-7">
+              <mat-form-field>
+                <mat-label>All Priority</mat-label>
+                <mat-select>
+                  @for (priority of priorities; track priority) {
+                  <mat-option [value]="priority.value">{{ priority.viewValue }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>All Status</mat-label>
+                <mat-select>
+                  @for (s of status; track s) {
+                  <mat-option [value]="s.value">{{ s.viewValue }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="flex items-center flex-wrap gap-3 mt-7">
+              <mat-form-field>
+                <mat-label>Start date</mat-label>
+                <input matInput [matDatepicker]="picker1" />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>End date</mat-label>
+                <input matInput [matDatepicker]="picker2" />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <button matButton="filled" class="self-start">
+              <mat-icon>save</mat-icon>
+              Save Changes
+            </button>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="flex-1 overdue-card">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <h2 class="text-[14px] pb-2 flex items-center gap-3" [style.color]="'var(--mat-sys-on-error-container)'">
+          <mat-icon class="!min-w-fit">schedule</mat-icon>
+          Overdue Tasks(2)
+        </h2>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="flex flex-col gap-3">
+          <div class="rounded-md overflow-hidden p-1" [style.background]="'var(--mat-sys-error-container)'">
+            <p class="p-2 rounded-md mb-2" [style.background]="'var(--mat-sys-error2-container)'">Implement CI/CD with GitHub Actions</p>
+            <p class="due-date text-[12px]" [style.color]="'var(--mat-sys-on-error-container)'">Due <span>Oct 25, 2025</span></p>
+          </div>
+          <div class="rounded-md overflow-hidden p-1" [style.background]="'var(--mat-sys-error-container)'">
+            <p class="p-2 rounded-md mb-2" [style.background]="'var(--mat-sys-error2-container)'">Some other expired task</p>
+            <p class="due-date text-[12px]" [style.color]="'var(--mat-sys-on-error-container)'">Due <span>Jan 5, 2026</span></p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

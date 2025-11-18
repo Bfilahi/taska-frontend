@@ -1,0 +1,23 @@
+<mat-toolbar class="border-b-1" [style.border-color]="'var(--mat-sys-secondary-container)'">
+  <div class="w-full max-w-[1200px] flex items-center justify-between gap-3">
+    @if (authService.isLoggedIn()) {
+    <button matIconButton (click)="utilityService.opened.set(!utilityService.opened())">
+      <mat-icon fontIcon="menu"></mat-icon>
+    </button>
+    }
+    <button matIconButton class="ml-auto" (click)="utilityService.toggleTheme()">
+      @if (utilityService.isDarkMode()) {
+      <mat-icon fontIcon="dark_mode"></mat-icon>
+      } @else {
+      <mat-icon fontIcon="light_mode"></mat-icon>
+      }
+    </button>
+
+    @if (authService.isLoggedIn()) {
+    <button matButton="outlined" (click)="logout()">Logout</button>
+    } @else {
+    <button matButton="outlined" (click)="openSignUpDialog()">Sign Up</button>
+    <button matButton="filled" (click)="openLoginDialog()">Login</button>
+    }
+  </div>
+</mat-toolbar>

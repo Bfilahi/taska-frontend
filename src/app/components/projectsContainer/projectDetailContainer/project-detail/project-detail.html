@@ -1,0 +1,48 @@
+<div class="p-4 sm:mx-7">
+  <mat-toolbar class="!h-full !p-0">
+    <div class="w-full my-7 flex flex-wrap items-start justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a matIconButton routerLink="/projects">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+
+        <h2 class="text-2xl !font-bold">Kubernetes Migration</h2>
+        <span
+          class="p-1 rounded-sm text-xs"
+          [style.background]="'var(--mat-extended-custom-color1-color-container)'"
+          [style.color]="'var(--mat-sys-on-secondary-fixed-variant)'"
+          >ACTIVE</span
+        >
+      </div>
+
+      <button matButton="filled" (click)="openNewTaskDialog()">
+        New Task
+        <mat-icon fontIcon="add_circle"></mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <app-analysis-card [cards]="cards" />
+
+  <div class="mt-7">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>layers</mat-icon>
+          <span class="mx-2">Tasks</span>
+        </ng-template>
+
+        <app-tasks-table />
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>settings</mat-icon>
+          <span class="mx-2">Settings</span>
+        </ng-template>
+
+        <app-project-settings />
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+  <div class="list-container">
+    @for (card of cards(); track card) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div class="w-full flex items-start justify-between">
+          <h3 class="whitespace-normal font-semibold">{{ card.title }}</h3>
+          <mat-icon class="rounded-md p-1" [style.color]="card.color" [style.background]="card.bg">
+            {{ card.icon }}
+          </mat-icon>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="text-4xl font-bold"> {{ card.amount }} </span>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>

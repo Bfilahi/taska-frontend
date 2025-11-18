@@ -1,0 +1,21 @@
+<div class="p-5 mt-9">
+  <div class="mb-7 flex flex-wrap items-start gap-5">
+    <app-task-notes />
+
+    <div class="flex flex-col gap-5">
+      <app-task-details-card />
+
+      <app-project-card />
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-start justify-between gap-2 mb-4">
+    <h2 class="font-bold text-lg">Subtasks</h2>
+
+    <button matButton="filled" (click)="openNewTaskDialog()">
+      New Task
+      <mat-icon fontIcon="add_circle"></mat-icon>
+    </button>
+  </div>
+  <app-subtasks-table />
+</div>

@@ -1,0 +1,103 @@
+<div class="p-4 sm:mx-7">
+  <mat-toolbar class="!h-full !p-0">
+    <div class="w-full my-7">
+      <div class="flex items-center gap-3">
+        <a matIconButton routerLink="/">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+        <h2 class="text-2xl !font-bold">Settings</h2>
+      </div>
+      <p class="subtext text-sm">Manage your profile and account settings</p>
+    </div>
+  </mat-toolbar>
+
+  <div class="mt-7">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>account_circle</mat-icon>
+          <span class="mx-2">Profile</span>
+        </ng-template>
+
+        <div class="mt-7 flex items-start gap-4">
+          <div class="flex-3">
+            <mat-card appearance="outlined" class="p-4">
+              <mat-card-header>
+                <h2 class="font-bold text-[17px] pb-2">Profile Information</h2>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="subtext">Update your name and email address</p>
+                <div class="flex flex-col gap-3 mt-4">
+                  <form class="flex flex-col gap-5 mb-6">
+                    <mat-form-field>
+                      <mat-label>Name</mat-label>
+                      <input matInput placeholder="Enter your name" class="placeholder:text-sm" />
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-label>Email</mat-label>
+                      <input
+                        type="email"
+                        matInput
+                        placeholder="Ex. pat@example.com"
+                        class="placeholder:text-sm"
+                      />
+                    </mat-form-field>
+                    <button matButton="filled" class="w-fit">Save</button>
+                  </form>
+
+                  <div class="delete-section rounded-md p-4" [style.background]="'var(--mat-sys-error-container)'">
+                    <h2 class="font-bold text-[17px] pb-2">Delete Account</h2>
+                    <p>Delete you account and all of its resources</p>
+
+                    <div class="flex flex-col gap-2 mt-4" [style.color]="'var(--mat-sys-error)'">
+                      <h2 class="font-bold text-[17px]">Warning</h2>
+                      <p>Please proceed with caution, this cannot be undone</p>
+                      <button matButton="filled" class="w-fit">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>password</mat-icon>
+          <span class="mx-2">Password</span>
+        </ng-template>
+
+        <div class="mt-7 flex items-start gap-4">
+          <div class="flex-3">
+            <mat-card appearance="outlined" class="p-4">
+              <mat-card-header>
+                <h2 class="font-bold text-[17px] pb-2">Change Password</h2>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="text-black/60">Update your account's password</p>
+                <div class="flex flex-col gap-3 mt-4">
+                  <form class="flex flex-col gap-5 mb-6">
+                    <mat-form-field>
+                      <mat-label>Old Password</mat-label>
+                      <input type="password" matInput placeholder="Enter old password" class="placeholder:text-sm" />
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-label>New Password</mat-label>
+                      <input type="password" matInput placeholder="Enter new password" class="placeholder:text-sm" />
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-label>Re-enter New Password</mat-label>
+                      <input type="password" matInput placeholder="Enter new password" class="placeholder:text-sm" />
+                    </mat-form-field>
+                    <button matButton="filled" class="w-fit">Save</button>
+                  </form>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+:host {
+  tr:nth-child(even) {
+    background-color: var(--mat-sys-inverse-on-surface);
+  }
+}

@@ -1,0 +1,19 @@
+<div class="flex items-center flex-wrap gap-3">
+  <mat-form-field>
+    <mat-label>All Priority</mat-label>
+    <mat-select>
+      @for (priority of priorities; track priority) {
+      <mat-option [value]="priority.value">{{ priority.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>All Status</mat-label>
+    <mat-select>
+      @for (s of status; track s) {
+      <mat-option [value]="s.value">{{ s.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

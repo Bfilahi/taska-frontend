@@ -1,0 +1,13 @@
+:host {
+  .list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2em;
+  }
+
+  .mat-icon {
+    font-size: 24px;
+    height: fit-content;
+    width: fit-content;
+  }
+}

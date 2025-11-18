@@ -1,0 +1,17 @@
+<app-project-task-form-project 
+header="Edit Task" 
+type="task" 
+buttonName="Save Changes" 
+icon="save"
+taskName="{{ taskName() }}"
+taskDescription="{{ taskDescription() }}"
+taskPriority="{{ taskPriority }}"
+taskStatus="{{ taskStatus }}">
+  <mat-form-field>
+    <mat-label>Due Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="taskDueDate"/>
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</app-project-task-form-project>

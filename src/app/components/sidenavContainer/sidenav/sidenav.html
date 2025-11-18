@@ -1,0 +1,26 @@
+<mat-sidenav-container class="h-full">
+  @if (authService.isLoggedIn()) {
+  <mat-sidenav mode="side" [(opened)]="utility.opened" class="max-w-[200px]">
+    <mat-list class="h-full !px-2 !py-4">
+      <div class="p-2 rounded-sm">
+        @for (item of sidenavBtns; track item.name) {
+        <mat-list-item class="!p-0">
+          <a
+            matButton
+            class="w-full"
+            [routerLink]="item.name"
+            [routerLinkActive]="['!bg-[#005cbb1e]']"
+          >
+            <mat-icon>{{ item.icon }}</mat-icon>
+            {{ item.name | titlecase }}
+          </a>
+        </mat-list-item>
+        }
+      </div>
+    </mat-list>
+  </mat-sidenav>
+  }
+  <mat-sidenav-content>
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>

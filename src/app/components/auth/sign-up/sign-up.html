@@ -1,0 +1,48 @@
+<div class="flex flex-col p-2" [style.background]="'var(--mat-sys-surface-container-highest)'">
+  <button matIconButton matDialogClose class="self-end">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
+  <h2 mat-dialog-title>Sign Up Form</h2>
+
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <h3>Please enter your details to create an account</h3>
+      <p>
+        <mat-form-field>
+          <mat-label>First name</mat-label>
+          <input matInput placeholder="Your First name" formControlName="firstName" />
+          <mat-icon matSuffix fontIcon="person"></mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Last name</mat-label>
+          <input matInput placeholder="Your Last name" formControlName="lastName" />
+          <mat-icon matSuffix fontIcon="person"></mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Your Email Address" type="email" formControlName="email" />
+          <mat-icon matSuffix fontIcon="email"></mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Create a Password" type="password" formControlName="password" />
+          <mat-icon matSuffix fontIcon="key"></mat-icon>
+        </mat-form-field>
+      </p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button matButton="filled" class="mx-auto w-full" type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+    </mat-dialog-actions>
+  </form>
+
+  <p class="text-sm self-center" [style.color]="'var(--mat-sys-inverse-surface)'">
+    You already have an account
+    <button class="underline cursor-pointer" (click)="openLoginDialog()">Login</button>
+  </p>
+</div>

@@ -1,0 +1,8 @@
+:host{
+    --mat-card-outlined-container-shape: 0;
+
+    .card:hover{
+        transition: background-color .4s ease;
+        background-color: var(--mat-sys-surface-container-high);
+    }
+}
