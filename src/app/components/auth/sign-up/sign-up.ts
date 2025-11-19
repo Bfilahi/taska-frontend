@@ -8,6 +8,7 @@ import { Login } from '../login/login';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SignupRequest } from '../../../dto/signupRequest';
 
 @Component({
   selector: 'app-sign-up',
