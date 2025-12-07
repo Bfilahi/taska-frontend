@@ -29,7 +29,6 @@ export class Sidenav {
 
   public sidenavBtns = [
     { name: 'dashboard', icon: 'dashboard' },
-    // {name: 'tasks', icon: 'checklist'},
     { name: 'projects', icon: 'assignment' },
     { name: 'settings', icon: 'settings' },
   ];

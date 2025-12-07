@@ -1,0 +1,54 @@
+<div class="flex flex-col p-2" [style.background]="'var(--mat-sys-surface-container-highest)'">
+  <button matIconButton matDialogClose class="self-end">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
+
+  <h2 matDialogTitle class="!font-bold">Edit Task</h2>
+
+  <form [formGroup]="editSubtaskForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <app-form-fields [type]="'task'"></app-form-fields>
+
+      <div class="flex items-center justify-between flex-wrap gap-3 mt-7">
+        <mat-form-field>
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            @for (s of statuses; track s) {
+            <mat-option [value]="s.value">{{ s.viewValue }}</mat-option>
+            }
+          </mat-select>
+          @if (editSubtaskForm.get('status')?.invalid && (editSubtaskForm.get('status')?.dirty ||
+          editSubtaskForm.get('status')?.touched)) {
+          <mat-error>
+            @if (editSubtaskForm.get('status')?.errors?.['required']) { Status is **required**. }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+          @if (editSubtaskForm.get('dueDate')?.invalid && (editSubtaskForm.get('dueDate')?.dirty ||
+          editSubtaskForm.get('dueDate')?.touched)) {
+          <mat-error>
+            @if (editSubtaskForm.get('dueDate')?.errors?.['required']) { Due date is **required**. }
+          </mat-error>
+          }
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button matButton="filled" type="submit" [disabled]="editSubtaskForm.invalid || isLoading()">
+        Edit Task @if (!isLoading()) {
+        <mat-icon fontIcon="save"></mat-icon>
+        } @else {
+        <mat-icon fontIcon="sync" class="animate-spin"></mat-icon>
+        }
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

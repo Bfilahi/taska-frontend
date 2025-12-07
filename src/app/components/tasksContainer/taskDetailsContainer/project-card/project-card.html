@@ -4,13 +4,43 @@
     <div class="flex flex-col gap-3">
       <div class="flex items-center gap-3">
         <mat-icon>edit</mat-icon>
-        <p>Kubernetes Migration.</p>
+        <p>{{ project()?.name }}</p>
       </div>
-      <small class="subtext">Project Start Date: <span>15 Oct 2025</span></small>
-      <div class="flex items-center justify-between gap-2 font-semibold" [style.color]="'var(--mat-sys-on-surface-variant)'">
-        <p>Status: <span>ACTIVE</span></p>
-        <p>Priority: <span>HIGH</span></p>
-        <p>Progress: <span>0%</span></p>
+      <small class="subtext"
+        >Project Start Date: <span>{{ project()?.startDate }}</span></small
+      >
+      <div
+        class="flex items-center justify-between gap-2 font-semibold"
+        [style.color]="'var(--mat-sys-on-surface-variant)'"
+      >
+        <p>
+          Status:
+          <span
+            [style.color]="
+              project()?.status === active
+                ? 'var(--mat-extended-custom-color1-color-container)'
+                : 'var(--mat-sys-outline)'
+            "
+            >{{ project()?.status }}</span
+          >
+        </p>
+        <p>
+          Priority:
+          <span
+            [style.color]="
+              project()?.priority === low
+                ? 'var(--mat-extended-custom-color1-color-container)'
+                : project()?.priority === medium
+                ? 'var(--mat-extended-custom-color2-color-container)'
+                : 'var(--mat-sys-error)'
+            "
+            >{{ project()?.priority }}</span
+          >
+        </p>
+        <p>
+          Progress:
+          <span>{{ project()?.progress }}%</span>
+        </p>
       </div>
     </div>
   </mat-card-content>

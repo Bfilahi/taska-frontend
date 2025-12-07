@@ -1,12 +1,13 @@
 @use '@angular/material' as mat;
 @use 'tailwindcss';
-
+/* Importing @ngxpert/hot-toast SCSS file. */
+@use '@ngxpert/hot-toast/styles';
 
 html {
   @include mat.theme(
     (
       color: (
-        use-system-variables: true
+        use-system-variables: true,
       ),
       typography: Outfit,
       density: -1,
@@ -14,12 +15,10 @@ html {
   );
 }
 
-
 html,
 body {
   height: 100%;
 }
-
 
 body {
   margin: 0;
@@ -39,22 +38,21 @@ body {
   /* SELECT */
   --mat-select-panel-background-color: var(--mat-sys-inverse-on-surface);
 
-  .subtext{
+  .subtext {
     color: var(--mat-sys-primary-subtask);
-  }
-
-  ::-webkit-scrollbar{
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track{
-    background-color: var(--mat-sys-secondary-container);
-  }
-  ::-webkit-scrollbar-thumb{
-    background-color: var(--mat-sys-primary-container);
   }
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--mat-sys-secondary-container);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--mat-sys-primary-container);
+}
 
 html {
   --mat-sys-primary: rgb(54 94 157);
@@ -119,7 +117,6 @@ html {
   --mat-sys-primary-subtask: rgba(98, 150, 240, 0.888);
 }
 
-
 .dark {
   --mat-sys-primary: rgb(170 199 255);
   --mat-sys-surface-tint: rgb(170 199 255);
@@ -181,5 +178,5 @@ html {
 
   --mat-extended-custom-color3-color-container: rgb(255 203 141);
 
-    --mat-sys-primary-subtask: rgba(73, 126, 217, 0.852);
+  --mat-sys-primary-subtask: rgba(73, 126, 217, 0.852);
 }

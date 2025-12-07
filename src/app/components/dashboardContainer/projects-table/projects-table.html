@@ -1,37 +1,45 @@
-<div>
-  <div class="flex items-center justify-between py-5 px-3 border rounded-t-md" 
-  [style.border-color]="'var(--mat-sys-secondary-container)'">
-  <h2 class="text-lg">Project Overview</h2>
+<div class="max-w-[100%]">
+  <div
+    class="flex items-center justify-between py-5 px-3 border rounded-t-md"
+    [style.border-color]="'var(--mat-sys-secondary-container)'"
+  >
+    <h2 class="text-lg">Project Overview</h2>
     <a routerLink="/projects" class="flex items-center justify-between gap-3"
       >View all <mat-icon>arrow_forward</mat-icon></a
     >
   </div>
 
-  @for (project of projects; track project) {
+  @for (project of projects(); track project.id) {
   <mat-card appearance="outlined" class="card">
     <a
       routerLink="/project-details"
-      [queryParams]="{ id: 1 }"
+      [queryParams]="{ id: project.id }"
       class="p-6 flex flex-col gap-4"
     >
-
       <div class="flex items-start justify-between">
         <h3 class="text-[17px] font-semibold">{{ project.name }}</h3>
-        <span class="p-1 rounded-sm text-xs" 
-        [style.background]="'var(--mat-extended-custom-color1-color-container)'"
-        [style.color]="'var(--mat-sys-on-secondary-fixed-variant)'">
-          {{ project.status }}
+        <span
+          class="p-1 rounded-sm text-xs"
+          [style.background]="
+            project.priority === low
+              ? 'var(--mat-extended-custom-color1-color-container)'
+              : project.priority === medium
+              ? 'var(--mat-extended-custom-color2-color-container)'
+              : 'var(--mat-sys-error)'
+          "
+        >
+          {{ project.priority }}
         </span>
       </div>
 
-      <p class="whitespace-nowrap text-ellipsis overflow-hidden subtext">
+      <p class="subtext">
         {{ project.description }}
       </p>
 
       <div class="flex items-center gap-4">
         <div class="flex items-center gap-2">
           <mat-icon class="!text-[17px]">calendar_today</mat-icon>
-          <span class="text-[12px]">{{ project.startDate | date : 'MMM d, y' }}</span>
+          <span class="text-[12px]">{{ project.dueDate | date : 'MMM d, y' }}</span>
         </div>
       </div>
 
@@ -44,5 +52,9 @@
       </div>
     </a>
   </mat-card>
+  } @if (projects().length <= 0 && isLoading()) {
+  <mat-spinner class="mx-auto"></mat-spinner>
+  } @if(projects().length <= 0 && !isLoading()){
+  <p [style.color]="'var(--mat-sys-error2-container)'" class="mt-4 text-center">Table is empty.</p>
   }
 </div>

@@ -1,50 +1,70 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from "@angular/material/card";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { RouterLink } from '@angular/router';
+import { Project } from '../../../services/project';
+import { HttpErrorResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-
-
-interface Project {
-  name: string;
-  description: string;
-  status: 'ACTIVE' | 'ON HOLD' | 'COMPLETED';
-  members: number;
-  startDate: Date;
-  progress: number; // 0 to 100
-}
+import { ProjectResponse } from '../../../dto/projectResponse';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { Subject, takeUntil } from 'rxjs';
+import { Priority } from '../../../enum/priorityEnum';
 
 
 @Component({
   selector: 'app-projects-table',
   imports: [
-    MatIconModule, 
-    MatCardModule, 
+    MatIconModule,
+    MatCardModule,
     MatProgressBarModule,
     RouterLink,
-    DatePipe
+    DatePipe,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './projects-table.html',
   styleUrl: './projects-table.scss',
 })
-export class ProjectsTable {
-  public projects: Project[] = [
-    {
-      name: 'Kubernetes Migration',
-      description: 'Migrate the monolithic app infrastructure to Kubernetes for scalability.',
-      status: 'ACTIVE',
-      members: 3,
-      startDate: new Date('2026-01-20'),
-      progress: 20,
-    },
-    {
-      name: 'Project: Automated Regression Suite',
-      description: 'Selenium + Playwright hybrid test framework for regression testing.',
-      status: 'ACTIVE',
-      members: 3,
-      startDate: new Date('2025-10-15'),
-      progress: 60,
-    },
-  ];
+export class ProjectsTable implements OnInit, OnDestroy {
+  public readonly projectService = inject(Project);
+  private destroy$ = new Subject<void>();
+
+  public projects = signal<ProjectResponse[]>([]);
+  public isLoading = signal<boolean>(true);
+  private partialParams: { page: number; size: number } = {
+    page: 1,
+    size: 3,
+  };
+
+  public low: Priority = Priority.LOW;
+  public medium: Priority = Priority.MEDIUM;
+  public high: Priority = Priority.HIGH;
+
+  ngOnInit(): void {
+    this.listProjects();
+
+    this.projectService.projectChanged$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.listProjects());
+  }
+
+  private listProjects() {
+    this.projectService.getAllProjects(this.partialParams).subscribe({
+      next: (response: any) => {
+        this.projects.set(response.content);
+        this.partialParams.page = response.number + 1;
+        this.partialParams.size = response.size;
+        this.isLoading.set(false);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.isLoading.set(false);
+      },
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

@@ -1,64 +1,114 @@
-<table mat-table [dataSource]="dataSource" class="!w-full">
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef class="!font-bold">Title</th>
-    <td mat-cell *matCellDef="let element" class="font-bold">{{ element.title }}</td>
-  </ng-container>
+<div class="overflow-x-scroll">
+  <table mat-table [dataSource]="subtasks()" class="!w-full">
+    <ng-container matColumnDef="completed">
+      <th mat-header-cell *matHeaderCellDef class="!font-bold"></th>
+      <td mat-cell *matCellDef="let element">
+        <section>
+          <mat-checkbox
+            [checked]="element.status === completed"
+            (change)="toggleSubtaskCompletion(element.id)"
+          ></mat-checkbox>
+        </section>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="priority">
-    <th mat-header-cell *matHeaderCellDef class="!font-bold">Priority</th>
-    <td mat-cell *matCellDef="let element">
-      <span
-        class="p-1 rounded-sm"
-        [style.background]="'var(--mat-extended-custom-color1-color-container)'"
-        [style.color]="'var(--mat-sys-on-secondary-fixed-variant)'"
-      >
-        {{ element.priority }}
-      </span>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef class="!font-bold">Title</th>
+      <td mat-cell *matCellDef="let element" class="font-bold">
+        <span class="whitespace-nowrap text-ellipsis overflow-hidden">{{ element.title }}</span>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef class="!font-bold">Status</th>
-    <td mat-cell *matCellDef="let element">
-      <div class="flex items-center gap-2">
-        <mat-icon
-          fontIcon="fiber_manual_record"
-          [style.color]="'var(--mat-extended-custom-color3-color-container)'"
-        ></mat-icon>
-        {{ element.status }}
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef class="!font-bold">Priority</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="p-1 rounded-sm"
+          [style.background]="
+            element.priority === low
+              ? 'var(--mat-extended-custom-color1-color-container)'
+              : element.priority === medium
+              ? 'var(--mat-extended-custom-color2-color-container)'
+              : 'var(--mat-sys-error)'
+          "
+        >
+          {{ element.priority }}
+        </span>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="dueDate">
-    <th mat-header-cell *matHeaderCellDef class="!font-bold">Due date</th>
-    <td mat-cell *matCellDef="let element">
-      <div class="flex items-center gap-2 whitespace-nowrap">
-        <mat-icon fontIcon="calendar_today" class="!text-sm !min-w-fit"></mat-icon>
-        {{ element.dueDate }}
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef class="!font-bold">Status</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="flex items-center gap-2">
+          <mat-icon
+            fontIcon="fiber_manual_record"
+            [style.color]="
+              element.status === active
+                ? 'var(--mat-extended-custom-color1-color-container)'
+                : 'var(--mat-sys-outline)'
+            "
+          ></mat-icon>
+          {{ element.status }}
+        </div>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="menu">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button matButton [matMenuTriggerFor]="menu">
-        <mat-icon fontIcon="more_vert"></mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openEditTaskDialog()">
-          Edit Task
-          <mat-icon fontIcon="edit"></mat-icon>
+    <ng-container matColumnDef="dueDate">
+      <th mat-header-cell *matHeaderCellDef class="!font-bold">Due date</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="flex items-center gap-2 whitespace-nowrap">
+          <mat-icon fontIcon="calendar_today" class="!text-sm !min-w-fit"></mat-icon>
+          {{ element.dueDate }}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="menu">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button matButton [matMenuTriggerFor]="menu">
+          <mat-icon fontIcon="more_vert"></mat-icon>
         </button>
-        <button mat-menu-item [style.color]="'var(--mat-sys-error)'">
-          <mat-icon fontIcon="delete" [style.color]="'var(--mat-sys-error)'"></mat-icon>
-          Delete Task
-        </button>
-      </mat-menu>
-    </td>
-  </ng-container>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openEditTaskDialog(element.id)">
+            Edit Task
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          <button
+            mat-menu-item
+            [style.color]="'var(--mat-sys-error)'"
+            (click)="onDelete(element.id)"
+          >
+            <mat-icon fontIcon="delete" [style.color]="'var(--mat-sys-error)'"></mat-icon>
+            Delete Task
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [ngClass]="{ 'opacity-40': row.status === completed }"
+    ></tr>
+  </table>
+</div>
+
+@if (subtasks().length <= 0 && isLoading()) {
+<mat-spinner class="mx-auto"></mat-spinner>
+} @if(subtasks().length <= 0 && !isLoading()){
+<p [style.color]="'var(--mat-sys-error2-container)'" class="mt-4 text-center">Table is empty.</p>
+} @if(subtasks().length > 0){
+<mat-paginator
+  class="mx-auto mt-7 w-fit"
+  [length]="totalElements()"
+  [pageSize]="partialParams.size"
+  [pageIndex]="partialParams.page - 1"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  (page)="onPageChange($event)"
+  aria-label="Select page"
+>
+</mat-paginator>
+}

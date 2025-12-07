@@ -1,8 +1,10 @@
-import { Priority } from "./priorityEnum";
+import { Priority } from "../enum/priorityEnum";
+import { Status } from "../enum/statusEnum";
 
 export interface ProjectRequest{
     name: string;
     description: string;
-    dueDate: Date;
-    priority: Priority
+    dueDate: Date | null;
+    priority: Priority;
+    status?: Status;
 }

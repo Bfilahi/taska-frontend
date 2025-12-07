@@ -1,0 +1,46 @@
+<div [formGroupName]="'reusableFields'">
+  <mat-form-field class="w-full">
+    <mat-label>{{ type() | titlecase }} Name</mat-label>
+    <input matInput placeholder="Enter {{ type() }} name" formControlName="name" />
+    @if (nameControl.invalid && (nameControl.dirty && nameControl.touched)) {
+    <mat-error>
+      @if (nameControl.errors?.['required']) { Name is **required**. }
+      @if(nameControl.errors?.['minlength']) { Name must be at least **{{ nameControl.errors?.['minlength'].requiredLength
+      }}** characters. }
+    </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field class="w-full">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="Describe your {{ type() }}"
+      formControlName="description"
+    ></textarea>
+    @if (descriptionControl.invalid && (descriptionControl.dirty && descriptionControl.touched)) {
+    <mat-error>
+      @if (descriptionControl.errors?.['required']) { Description is **required**. }
+      @if(descriptionControl.errors?.['minlength']) { Description must be at least **{{ descriptionControl.errors?.['minlength'].requiredLength
+
+
+
+      }}** characters. }
+    </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Priority</mat-label>
+    <mat-select formControlName="priority">
+      @for (priority of priorities; track priority) {
+      <mat-option [value]="priority.value">{{ priority.viewValue }}</mat-option>
+      }
+    </mat-select>
+    @if (priorityControl.invalid && (priorityControl.dirty || priorityControl.touched)) {
+    <mat-error>
+      @if (priorityControl.errors?.['required']) { Priority is **required**. }
+    </mat-error>
+    }
+  </mat-form-field>
+</div>

@@ -10,24 +10,41 @@
       [style.background]="'var(--mat-sys-tertiary-fixed)'"
       [style.color]="'var(--mat-sys-on-tertiary-fixed-variant)'"
     >
-      2
+      {{ projects().length }}
     </span>
   </div>
 
   <mat-card appearance="outlined">
     <div class="flex flex-col gap-3 p-4">
-      <a routerLink="/" class="card flex flex-col gap-1 p-4 rounded-md">
+      @for (project of projects(); track project.id) {
+      <a
+        routerLink="/project-details"
+        [queryParams]="{ id: project.id }"
+        class="card flex flex-col gap-1 p-4 rounded-md"
+      >
         <h3 class="text-[15px] font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
-          Implement CI/CD with GitHub Actions
+          {{ project.name }}
         </h3>
-        <p class="subtext">MEDIUM Priority</p>
+        <p class="subtext">{{ project.priority }} Priority</p>
       </a>
-      <a routerLink="/" class="card flex flex-col gap-1 p-4 rounded-md">
-        <h3 class="text-[15px] font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
-          Migrate to Playwright 1.48
-        </h3>
-        <p class="subtext">HIGH Priority</p>
-      </a>
+      }
     </div>
+
+    @if(projects().length <= 0 && !isLoading()){
+    <p [style.color]="'var(--mat-sys-error2-container)'" class="my-4 text-center">
+      Table is empty.
+    </p>
+    }
   </mat-card>
+
+  @if(projects().length > 0){
+  <mat-paginator
+    [length]="totalElements()"
+    [pageSize]="partialParams.size"
+    [pageIndex]="partialParams.page - 1"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+  }
 </div>

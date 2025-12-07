@@ -1,0 +1,38 @@
+<div class="flex flex-col p-2" [style.background]="'var(--mat-sys-surface-container-highest)'">
+  <button matIconButton matDialogClose class="self-end">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
+
+  <h2 matDialogTitle class="!font-bold">New Subtask</h2>
+
+  <form [formGroup]="newSubtaskForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <app-form-fields [type]="'subtask'"></app-form-fields>
+
+      <mat-form-field>
+        <mat-label>Due Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+        @if (newSubtaskForm.get('dueDate')?.invalid && (newSubtaskForm.get('dueDate')?.dirty ||
+        newSubtaskForm.get('dueDate')?.touched)) {
+        <mat-error>
+          @if (newSubtaskForm.get('dueDate')?.errors?.['required']) { Due date is **required**. }
+          @if (newSubtaskForm.get('dueDate')?.errors?.['dateAfterToday']) { Due date must be greater than today. }
+        </mat-error>
+        }
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button matButton="filled" type="submit" [disabled]="newSubtaskForm.invalid || isLoading()">
+        Add Task @if(!isLoading()){
+        <mat-icon fontIcon="add_circle"></mat-icon>
+        } @else {
+        <mat-icon fontIcon="sync" class="animate-spin"></mat-icon>
+        }
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

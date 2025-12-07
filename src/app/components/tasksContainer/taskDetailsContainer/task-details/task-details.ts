@@ -10,7 +10,7 @@ import { TaskNotes } from "../task-notes/task-notes";
 import { TaskDetailsCard } from "../task-details-card/task-details-card";
 import { ProjectCard } from "../project-card/project-card";
 import { MatDialog } from '@angular/material/dialog';
-import { NewTask } from '../../new-task/new-task';
+import { NewSubtask } from '../new-subtask/new-subtask';
 
 
 
@@ -33,6 +33,8 @@ import { NewTask } from '../../new-task/new-task';
   styleUrl: './task-details.scss',
 })
 export class TaskDetails {
+  private readonly dialog = inject(MatDialog);
+
   public priorities = [
     { value: 'LOW-0', viewValue: 'LOW' },
     { value: 'MEDIUM-1', viewValue: 'MEDIUM' },
@@ -45,9 +47,7 @@ export class TaskDetails {
     { value: 'COMPLETED-2', viewValue: 'COMPLETED' },
   ];
 
-  readonly dialog = inject(MatDialog);
   public openNewTaskDialog(): void {
-    this.dialog.closeAll();
-    this.dialog.open(NewTask);
+    this.dialog.open(NewSubtask);
   }
 }

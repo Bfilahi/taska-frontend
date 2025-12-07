@@ -6,12 +6,16 @@
           <mat-icon>arrow_back</mat-icon>
         </a>
 
-        <h2 class="text-2xl !font-bold">Kubernetes Migration</h2>
+        <h2 class="text-2xl !font-bold">{{ project()?.name }}</h2>
         <span
           class="p-1 rounded-sm text-xs"
-          [style.background]="'var(--mat-extended-custom-color1-color-container)'"
-          [style.color]="'var(--mat-sys-on-secondary-fixed-variant)'"
-          >ACTIVE</span
+          [style.background]="
+            project()?.status === active
+              ? 'var(--mat-extended-custom-color1-color-container)'
+              : 'var(--mat-sys-outline)'
+          "
+          [style.color]="'var(--mat-sys-on-primary-fixed-variant)'"
+          >{{ project()?.status }}</span
         >
       </div>
 
@@ -22,7 +26,7 @@
     </div>
   </mat-toolbar>
 
-  <app-analysis-card [cards]="cards" />
+  <app-analysis-card [cards]="cards()" />
 
   <div class="mt-7">
     <mat-tab-group>

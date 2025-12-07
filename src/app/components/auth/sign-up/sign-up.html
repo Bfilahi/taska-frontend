@@ -12,6 +12,17 @@
           <mat-label>First name</mat-label>
           <input matInput placeholder="Your First name" formControlName="firstName" />
           <mat-icon matSuffix fontIcon="person"></mat-icon>
+
+          @if (signupForm.get('firstName')?.touched && signupForm.get('firstName')?.dirty) {
+          <mat-error>
+            @if (signupForm.get('firstName')?.errors?.['required']) { First name is **required**. }
+            @if (signupForm.get('firstName')?.errors?.['minlength']) { First name must be at least
+            **{{ signupForm.get('firstName')?.errors?.['minlength'].requiredLength
+            }}** characters. } @if (signupForm.get('firstName')?.errors?.['maxlength']) { First name
+            must be at most **{{ signupForm.get('firstName')?.errors?.['maxlength'].requiredLength
+            }}** characters. }
+          </mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
@@ -19,6 +30,17 @@
           <mat-label>Last name</mat-label>
           <input matInput placeholder="Your Last name" formControlName="lastName" />
           <mat-icon matSuffix fontIcon="person"></mat-icon>
+
+          @if (signupForm.get('lastName')?.touched && signupForm.get('lastName')?.dirty) {
+          <mat-error>
+            @if (signupForm.get('lastName')?.errors?.['required']) { Last name is **required**. }
+            @if (signupForm.get('lastName')?.errors?.['minlength']) { Last name must be at least
+            **{{ signupForm.get('lastName')?.errors?.['minlength'].requiredLength
+            }}** characters. } @if (signupForm.get('lastName')?.errors?.['maxlength']) { Last name
+            must be at most **{{ signupForm.get('lastName')?.errors?.['maxlength'].requiredLength
+            }}** characters. }
+          </mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
@@ -26,18 +48,46 @@
           <mat-label>Email</mat-label>
           <input matInput placeholder="Your Email Address" type="email" formControlName="email" />
           <mat-icon matSuffix fontIcon="email"></mat-icon>
+
+          @if (signupForm.get('email')?.touched && signupForm.get('email')?.dirty) {
+          <mat-error>
+            @if (signupForm.get('email')?.errors?.['required']) { Email name is **required**. } @if
+            (signupForm.get('email')?.errors?.['pattern']) { Invalid email. }
+          </mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Create a Password" type="password" formControlName="password" />
+          <input
+            matInput
+            placeholder="Create a Password"
+            type="password"
+            formControlName="password"
+          />
           <mat-icon matSuffix fontIcon="key"></mat-icon>
+
+          @if (signupForm.get('password')?.touched && signupForm.get('password')?.dirty) {
+          <mat-error>
+            @if (signupForm.get('password')?.errors?.['required']) { Password is **required**. }
+            @if (signupForm.get('password')?.errors?.['pattern']) { Password is **weak**. }
+          </mat-error>
+          }
         </mat-form-field>
       </p>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button matButton="filled" class="mx-auto w-full" type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+      <button
+        matButton="filled"
+        class="mx-auto w-full"
+        type="submit"
+        [disabled]="signupForm.invalid || isLoading()"
+      >
+        Sign Up @if (isLoading()){
+        <mat-icon fontIcon="sync" class="animate-spin"></mat-icon>
+        }
+      </button>
     </mat-dialog-actions>
   </form>
 

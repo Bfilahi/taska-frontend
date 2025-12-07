@@ -1,0 +1,90 @@
+<div class="mt-7 flex items-start gap-4">
+  <div class="flex-3">
+    <mat-card appearance="outlined" class="p-4">
+      <mat-card-header>
+        <h2 class="font-bold text-[17px] pb-2">Profile Information</h2>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="subtext">Update your name and email address</p>
+        <div class="flex flex-col gap-3 mt-4">
+          <form [formGroup]="profileForm" (ngSubmit)="save()" class="flex flex-col gap-5 mb-6">
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                placeholder="Enter your first name"
+                formControlName="firstName"
+                class="placeholder:text-sm"
+              />
+              @if (profileForm.get('firstName')?.touched && profileForm.get('firstName')?.dirty) {
+              <mat-error>
+                @if (profileForm.get('firstName')?.errors?.['required']) { First name is
+                **required**. } @if (profileForm.get('firstName')?.errors?.['minlength']) { First
+                name must be at least **{{ profileForm.get('firstName')?.errors?.['minlength'].requiredLength
+                }}** characters. }
+              </mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input
+                matInput
+                placeholder="Enter your last name"
+                formControlName="lastName"
+                class="placeholder:text-sm"
+              />
+              @if (profileForm.get('lastName')?.touched && profileForm.get('lastName')?.dirty) {
+              <mat-error>
+                @if (profileForm.get('lastName')?.errors?.['required']) { Last name is **required**.
+                } @if (profileForm.get('lastName')?.errors?.['minlength']) { First name must be at
+                least **{{ profileForm.get('lastName')?.errors?.['minlength'].requiredLength
+                }}** characters. }
+              </mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                placeholder="Ex. pat@example.com"
+                class="placeholder:text-sm"
+                formControlName="email"
+              />
+              @if (profileForm.get('email')?.touched && profileForm.get('email')?.dirty) {
+              <mat-error>
+                @if (profileForm.get('email')?.errors?.['required']) { Email name is **required**. }
+                @if (profileForm.get('email')?.errors?.['pattern']) { Invalid email. }
+              </mat-error>
+              }
+            </mat-form-field>
+            <button
+              matButton="filled"
+              class="w-fit"
+              type="submit"
+              [disabled]="profileForm.invalid || isLoading()"
+            >
+              Save @if (isLoading()){
+              <mat-icon fontIcon="sync" class="animate-spin"></mat-icon>
+              }
+            </button>
+          </form>
+
+          <div
+            class="delete-section rounded-md p-4"
+            [style.background]="'var(--mat-sys-error-container)'"
+          >
+            <h2 class="font-bold text-[17px] pb-2">Delete Account</h2>
+            <p>Delete you account and all of its resources</p>
+
+            <div class="flex flex-col gap-2 mt-4" [style.color]="'var(--mat-sys-error)'">
+              <h2 class="font-bold text-[17px]">Warning</h2>
+              <p>Please proceed with caution, this cannot be undone</p>
+              <button matButton="filled" class="w-fit" (click)="delete()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

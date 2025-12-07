@@ -1,19 +1,41 @@
-<app-project-task-form-project header="New Project" type="project" buttonName="Add Project" icon="add_circle">
-  <div class="flex items-center justify-between flex-wrap gap-3 mt-7">
-    <mat-form-field>
-      <mat-label>Start Date</mat-label>
-      <input matInput [matDatepicker]="picker" />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+<div class="flex flex-col p-2" [style.background]="'var(--mat-sys-surface-container-highest)'">
+  <button matIconButton matDialogClose class="self-end">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
 
-    <mat-form-field>
-      <mat-label>End Date</mat-label>
-      <input matInput [matDatepicker]="picker1" />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-  </div>
-</app-project-task-form-project>
+  <h2 matDialogTitle class="!font-bold">New Project</h2>
+
+  <form [formGroup]="newProjectForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <app-form-fields [type]="'project'"></app-form-fields>
+        <mat-form-field>
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="pickerEnd" formControlName="dueDate"/>
+          @if (newProjectForm.get('dueDate')?.invalid && (newProjectForm.get('dueDate')?.dirty ||
+          newProjectForm.get('dueDate')?.touched)) {
+          <mat-error>
+            @if (newProjectForm.get('dueDate')?.errors?.['required']) { Due date is **required**. }
+            @if (newProjectForm.get('dueDate')?.errors?.['dateAfterToday']) { Due date must be greater than today. }
+          </mat-error>
+          }
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button
+        matButton="filled"
+        type="submit"
+        [disabled]="newProjectForm.invalid || isLoading()"
+      >
+        Add Project @if (!isLoading()) {
+        <mat-icon fontIcon="add_circle"></mat-icon>
+        } @else {
+        <mat-icon fontIcon="sync" class="animate-spin"></mat-icon>
+        }
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

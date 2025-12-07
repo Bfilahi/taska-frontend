@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { SignupRequest } from '../dto/signupRequest';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,13 @@ export class AuthService {
 
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
+  private readonly userService = inject(User);
 
   public isLoggedIn = signal<boolean>(false);
 
 
   constructor(){
-    const token = localStorage.getItem('jwt');
+    const token = this.getToken();
     if(token)
       this.isLoggedIn.set(true);
   }
@@ -33,8 +35,13 @@ export class AuthService {
       tap((response) => {
         this.saveToken(response);
         this.isLoggedIn.set(true);
+        this.userService.getUser();
       })
     );
+  }
+
+  public getToken(): string | null{
+    return localStorage.getItem('jwt');
   }
 
   private saveToken(token: string){
@@ -43,6 +50,7 @@ export class AuthService {
 
   public logout(){
     localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
     this.isLoggedIn.set(false);
     this.router.navigate(['/']);
   }

@@ -1,125 +1,69 @@
 <div class="projects-grid">
+  @for (project of projects(); track project.id) {
   <mat-card appearance="outlined">
-    <a routerLink="/">
+    <a routerLink="/project-details" [queryParams]="{ id: project.id }">
       <mat-card-header>
-        <!-- <h2 class="font-bold text-[17px] pb-2 hover:text-[#046e8f]">Research Hero section</h2> -->
-        <h2 class="font-bold text-[17px] pb-2">Research Hero section</h2>
+        <h2 class="font-bold text-[17px] pb-2">{{ project.name }}</h2>
       </mat-card-header>
       <mat-card-content>
         <div class="flex flex-col gap-3">
           <p class="text-gray-500 font-light">
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-            Japan. A small, agile dog that copes very well with mountainous terrain.
+            {{ project.description }}
           </p>
-          <!-- <div class="flex items-center justify-between text-gray-500"> -->
           <div class="flex items-center justify-between">
-            <!-- <span class="bg-green-200 py-0.5 px-1 rounded-sm">ACTIVE</span> -->
-            <span class="bg-green-500/40 py-0.5 px-1 rounded-sm">ACTIVE</span>
-            <span>HIGH Priority</span>
+            <span
+              class="py-0.5 px-1 rounded-sm"
+              [style.color]="'var(--mat-sys-on-primary-fixed-variant)'"
+              [style.background]="
+                project.status === active
+                  ? 'var(--mat-extended-custom-color1-color-container)'
+                  : 'var(--mat-sys-outline)'
+              "
+            >
+              {{ project.status }}
+            </span>
+            <span>
+              <span
+                [style.color]="
+                  project.priority === low
+                    ? 'var(--mat-extended-custom-color1-color-container)'
+                    : project.priority === medium
+                    ? 'var(--mat-extended-custom-color2-color-container)'
+                    : 'var(--mat-sys-error)'
+                "
+                >{{ project.priority }}</span
+              >
+              Priority</span
+            >
           </div>
 
           <div class="flex flex-col gap-2">
             <div class="flex items-center justify-between text-gray-500">
               <small>Progress</small>
-              <small>0%</small>
+              <small>{{ project.progress }}%</small>
             </div>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+            <mat-progress-bar mode="determinate" value="{{ project.progress }}"></mat-progress-bar>
           </div>
         </div>
       </mat-card-content>
     </a>
   </mat-card>
-
-  <mat-card appearance="outlined">
-    <a routerLink="/">
-      <mat-card-header>
-        <!-- <h2 class="font-bold text-[17px] pb-2 hover:text-[#046e8f]">Research Hero section</h2> -->
-        <h2 class="font-bold text-[17px] pb-2">Research Hero section</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="flex flex-col gap-3">
-          <p class="text-gray-500 font-light">
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-            Japan. A small, agile dog that copes very well with mountainous terrain.
-          </p>
-          <!-- <div class="flex items-center justify-between text-gray-500">
-            <span class="bg-green-200 py-0.5 px-1 rounded-sm">ACTIVE</span> -->
-          <div class="flex items-center justify-between">
-            <span class="bg-green-500/40 py-0.5 px-1 rounded-sm">ACTIVE</span>
-            <span>HIGH Priority</span>
-          </div>
-
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center justify-between text-gray-500">
-              <small>Progress</small>
-              <small>0%</small>
-            </div>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-          </div>
-        </div>
-      </mat-card-content>
-    </a>
-  </mat-card>
-
-  <mat-card appearance="outlined">
-    <a routerLink="/">
-      <mat-card-header>
-        <!-- <h2 class="font-bold text-[17px] pb-2 hover:text-[#046e8f]">Research Hero section</h2> -->
-        <h2 class="font-bold text-[17px] pb-2">Research Hero section</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="flex flex-col gap-3">
-          <p class="text-gray-500 font-light">
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-            Japan. A small, agile dog that copes very well with mountainous terrain.
-          </p>
-          <!-- <div class="flex items-center justify-between text-gray-500">
-            <span class="bg-green-200 py-0.5 px-1 rounded-sm">ACTIVE</span> -->
-          <div class="flex items-center justify-between">
-            <span class="bg-green-500/40 py-0.5 px-1 rounded-sm">ACTIVE</span>
-            <span>HIGH Priority</span>
-          </div>
-
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center justify-between text-gray-500">
-              <small>Progress</small>
-              <small>0%</small>
-            </div>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-          </div>
-        </div>
-      </mat-card-content>
-    </a>
-  </mat-card>
-
-  <mat-card appearance="outlined">
-    <a routerLink="/">
-      <mat-card-header>
-        <!-- <h2 class="font-bold text-[17px] pb-2 hover:text-[#046e8f]">Research Hero section</h2> -->
-        <h2 class="font-bold text-[17px] pb-2">Research Hero section</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="flex flex-col gap-3">
-          <p class="text-gray-500 font-light">
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-            Japan. A small, agile dog that copes very well with mountainous terrain.
-          </p>
-          <!-- <div class="flex items-center justify-between text-gray-500">
-            <span class="bg-green-200 py-0.5 px-1 rounded-sm">ACTIVE</span> -->
-          <div class="flex items-center justify-between">
-            <span class="bg-green-500/40 py-0.5 px-1 rounded-sm">ACTIVE</span>
-            <span>HIGH Priority</span>
-          </div>
-
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center justify-between text-gray-500">
-              <small>Progress</small>
-              <small>0%</small>
-            </div>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-          </div>
-        </div>
-      </mat-card-content>
-    </a>
-  </mat-card>
+  }
 </div>
+
+@if (projects().length <= 0 && (isLoading() || isSearchLoading())) {
+<mat-spinner class="mx-auto"></mat-spinner>
+} @if(projects().length <= 0 && !isLoading() && !isSearchLoading()){
+<p [style.color]="'var(--mat-sys-error2-container)'" class="mt-4 text-center">Table is empty.</p>
+} @if (projects().length > 0){
+<mat-paginator
+  class="mx-auto mt-7 w-fit"
+  [length]="totalElements()"
+  [pageSize]="partialParams().size"
+  [pageIndex]="partialParams().page - 1"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  (page)="onPageChange($event)"
+  aria-label="Select page"
+>
+</mat-paginator>
+}

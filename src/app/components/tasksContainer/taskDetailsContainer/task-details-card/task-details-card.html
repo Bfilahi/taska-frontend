@@ -1,9 +1,20 @@
-<mat-card appearance="outlined" class="min-w-fit">
-  <mat-card-header class="font-semibold text-lg mb-4">Security audit</mat-card-header>
+<mat-card appearance="outlined" class="min-w-fit max-w-[500px]">
+  <mat-card-header class="font-semibold text-lg mb-4">{{ task()?.title | titlecase }}</mat-card-header>
   <mat-card-content>
     <div class="flex flex-col gap-3">
-      <span class="bg-green-500/30 p-1 rounded-sm w-fit">MEDIUM</span>
-      <p class="subtext">Run container vulnerability scans and review IAM roles.</p>
+      <span
+        class="p-1 rounded-sm w-fit"
+        [style.background]="
+          task()?.priority === low
+            ? 'var(--mat-extended-custom-color1-color-container)'
+            : task()?.priority === medium
+            ? 'var(--mat-extended-custom-color2-color-container)'
+            : 'var(--mat-sys-error)'
+        "
+      >
+        {{ task()?.priority }}
+      </span>
+      <p class="subtext">{{ task()?.description | titlecase }}</p>
       <hr class="text-black/20" />
       <div class="flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
@@ -14,11 +25,15 @@
           >
             A
           </div>
-          <h4 class="font-bold">Filahi Bassete</h4>
+          <h4 class="font-bold">
+            {{ userService.user()?.firstName }} {{ userService.user()?.lastName }}
+          </h4>
         </div>
         <div class="flex items-center gap-1">
           <mat-icon class="!text-sm !min-w-fit" fontIcon="calendar_today"></mat-icon>
-          <div>Due: <span>10 Dec 2025</span></div>
+          <div>
+            Due: <span>{{ task()?.dueDate }}</span>
+          </div>
         </div>
       </div>
     </div>

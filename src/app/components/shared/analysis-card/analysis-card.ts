@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { MatCardModule } from "@angular/material/card";
-import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-analysis-card',
@@ -15,7 +15,7 @@ export class AnalysisCard {
       amount: 0,
       icon: '',
       color: '',
-      bg: ''
+      bg: '',
     },
   ]);
 }

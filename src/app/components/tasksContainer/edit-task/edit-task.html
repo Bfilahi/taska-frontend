@@ -1,17 +1,54 @@
-<app-project-task-form-project 
-header="Edit Task" 
-type="task" 
-buttonName="Save Changes" 
-icon="save"
-taskName="{{ taskName() }}"
-taskDescription="{{ taskDescription() }}"
-taskPriority="{{ taskPriority }}"
-taskStatus="{{ taskStatus }}">
-  <mat-form-field>
-    <mat-label>Due Date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="taskDueDate"/>
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</app-project-task-form-project>
+<div class="flex flex-col p-2" [style.background]="'var(--mat-sys-surface-container-highest)'">
+  <button matIconButton matDialogClose class="self-end">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
+
+  <h2 matDialogTitle class="!font-bold">Edit Task</h2>
+
+  <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <app-form-fields [type]="'task'"></app-form-fields>
+
+      <div class="flex items-center justify-between flex-wrap gap-3 mt-7">
+        <mat-form-field>
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            @for (s of statuses; track s) {
+            <mat-option [value]="s.value">{{ s.viewValue }}</mat-option>
+            }
+          </mat-select>
+          @if (editTaskForm.get('status')?.invalid && (editTaskForm.get('status')?.dirty ||
+          editTaskForm.get('status')?.touched)) {
+          <mat-error>
+            @if (editTaskForm.get('status')?.errors?.['required']) { Status is **required**. }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+          @if (editTaskForm.get('dueDate')?.invalid && (editTaskForm.get('dueDate')?.dirty ||
+          editTaskForm.get('dueDate')?.touched)) {
+          <mat-error>
+            @if (editTaskForm.get('dueDate')?.errors?.['required']) { Due date is **required**. }
+          </mat-error>
+          }
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button matButton="filled" type="submit" [disabled]="editTaskForm.invalid || isLoading()">
+        Edit Task @if (!isLoading()) {
+        <mat-icon fontIcon="save"></mat-icon>
+        } @else {
+        <mat-icon fontIcon="sync" class="animate-spin"></mat-icon>
+        }
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

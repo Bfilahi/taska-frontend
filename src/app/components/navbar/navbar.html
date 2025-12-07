@@ -1,5 +1,5 @@
 <mat-toolbar class="border-b-1" [style.border-color]="'var(--mat-sys-secondary-container)'">
-  <div class="w-full max-w-[1200px] flex items-center justify-between gap-3">
+  <div class="w-full max-w-[1200px] flex items-center justify-between gap-3 mx-auto">
     @if (authService.isLoggedIn()) {
     <button matIconButton (click)="utilityService.opened.set(!utilityService.opened())">
       <mat-icon fontIcon="menu"></mat-icon>

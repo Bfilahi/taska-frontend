@@ -5,6 +5,5 @@ export interface UserResponse{
     firstName: string;
     lastName: string;
     email: string;
-    profileImage: string;
     authorities: Authority;
 }

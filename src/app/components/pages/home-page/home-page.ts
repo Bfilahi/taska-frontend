@@ -15,12 +15,10 @@ export class HomePage {
   readonly dialog = inject(MatDialog);
 
   public openSignUpDialog(): void {
-    this.dialog.closeAll();
     this.dialog.open(SignUp);
   }
 
   public openLoginDialog(): void {
-    this.dialog.closeAll();
     this.dialog.open(Login);
   }
 }

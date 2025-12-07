@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PriorityStatus } from './priority-status';
+import { Profile } from './profile';
 
-describe('PriorityStatus', () => {
-  let component: PriorityStatus;
-  let fixture: ComponentFixture<PriorityStatus>;
+describe('Profile', () => {
+  let component: Profile;
+  let fixture: ComponentFixture<Profile>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PriorityStatus]
+      imports: [Profile]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PriorityStatus);
+    fixture = TestBed.createComponent(Profile);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

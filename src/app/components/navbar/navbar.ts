@@ -26,12 +26,10 @@ export class Navbar {
   });
 
   public openLoginDialog(): void {
-    this.dialog.closeAll();
     this.dialog.open(Login);
   }
 
   public openSignUpDialog(): void {
-    this.dialog.closeAll();
     this.dialog.open(SignUp);
   }
 
