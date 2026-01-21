@@ -2,6 +2,14 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
 
+## Demos
+
+![taska_browse](https://github.com/user-attachments/assets/12151394-bfa7-4e46-ba01-e51ed64f466f)
+
+![taska_add_edit_delete_task](https://github.com/user-attachments/assets/fb5c6b2d-9096-44cd-82b6-8b7e5d41d1ba)
+
+![taska_view_project_add_note](https://github.com/user-attachments/assets/08471f12-a0e4-49a8-9f1c-5212d1f55850)
+
 ## Development server
 
 To start a local development server, run:
