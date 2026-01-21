@@ -200,10 +200,10 @@ export class ProjectSettings implements OnInit, OnDestroy {
     this.taskService.getOverdueTasks(this.partialParams, this.projectId()).subscribe({
       next: (response: any) => {
         this.overdueTasks.set(response.content);
-        this.partialParams.page = response.number + 1;
-        this.partialParams.size = response.size;
-        this.totalElements.set(response.totalElements);
-        this.totalPages.set(response.totalPages);
+        this.partialParams.page = response.page.number + 1;
+        this.partialParams.size = response.page.size;
+        this.totalElements.set(response.page.totalElements);
+        this.totalPages.set(response.page.totalPages);
       },
       error: (err: HttpErrorResponse) => {
         console.error(err);

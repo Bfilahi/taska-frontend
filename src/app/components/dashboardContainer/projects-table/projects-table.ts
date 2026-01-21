@@ -52,8 +52,8 @@ export class ProjectsTable implements OnInit, OnDestroy {
     this.projectService.getAllProjects(this.partialParams).subscribe({
       next: (response: any) => {
         this.projects.set(response.content);
-        this.partialParams.page = response.number + 1;
-        this.partialParams.size = response.size;
+        this.partialParams.page = response.page.number + 1;
+        this.partialParams.size = response.page.size;
         this.isLoading.set(false);
       },
       error: (err: HttpErrorResponse) => {

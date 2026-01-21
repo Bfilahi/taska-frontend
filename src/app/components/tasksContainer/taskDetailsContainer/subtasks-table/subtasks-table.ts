@@ -124,10 +124,10 @@ export class SubtasksTable implements OnInit {
     this.subtaskService.getSubTasks(this.taskId(), this.partialParams).subscribe({
       next: (response: any) => {
         this.subtasks.set(response.content);
-        this.partialParams.page = response.number + 1;
-        this.partialParams.size = response.size;
-        this.totalElements.set(response.totalElements);
-        this.totalPages.set(response.totalPages);
+        this.partialParams.page = response.page.number + 1;
+        this.partialParams.size = response.page.size;
+        this.totalElements.set(response.page.totalElements);
+        this.totalPages.set(response.page.totalPages);
         this.isLoading.set(false);
       },
       error: (err: HttpErrorResponse) => {
