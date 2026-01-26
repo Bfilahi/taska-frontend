@@ -40,7 +40,6 @@ export class TaskNotes implements OnInit {
       this.isPostLoading.set(true);
       this.noteService.addNewNote(this.taskId(), noteValue).subscribe({
         next: (response: NoteResponse) => {
-          console.log('Note added successfully. ', response);
           note.value = '';
           this.getNotes();
           this.isPostLoading.set(false);
@@ -59,7 +58,6 @@ export class TaskNotes implements OnInit {
     this.isDeleteLoading.set(true);
     this.noteService.deleteNote(noteId, this.taskId()).subscribe({
       next: () => {
-        console.log('Note has been deleted successfully.');
         this.getNotes();
         this.isDeleteLoading.set(false);
       },

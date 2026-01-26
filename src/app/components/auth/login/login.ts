@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -44,6 +44,7 @@ export class Login {
 
   public isLoading = signal<boolean>(false);
 
+
   public onSubmit() {
     this.isLoading.set(true);
 
@@ -57,9 +58,7 @@ export class Login {
         this.isLoading.set(false);
         this.dialogRef.close();
         this.router.navigate(['dashboard']);
-        setTimeout(() => {
-          this.toaster.success(`Welcome, ${this.userService.user()?.firstName}`);
-        }, 1000);
+        this.toaster.success('Welcome');
       },
       error: (err: HttpErrorResponse) => {
         this.isLoading.set(false);
