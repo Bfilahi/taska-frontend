@@ -1,3 +1,3 @@
 export const environment = {
-  BASE_URL: 'https://taska-app-latest.onrender.com/api'
+  BASE_URL: 'https://my-tasks.shop/api'
 };
