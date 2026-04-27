@@ -80,6 +80,16 @@ describe('User', () => {
     });
   });
 
+  describe('getUserInfo()', () => {
+    it('should call the method URL correctly', () => {
+      service['getUserInfo']().subscribe();
+
+      const req = httpTestingController.expectOne(`${baseUrl}/info`);
+      req.flush(mockUserResponse);
+      expect(req.request.method).toBe('GET');
+    });
+  });
+
   describe('saveUser()', () => {
     it('should set the signal with the response and persist it to localStorage on success', () => {
       spyOn<any>(service, 'getUserInfo').and.returnValue(of(mockUserResponse));
