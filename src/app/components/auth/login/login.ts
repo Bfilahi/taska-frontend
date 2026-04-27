@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
-import { User } from '../../../services/user';
+
 
 @Component({
   selector: 'app-login',
@@ -29,7 +29,6 @@ export class Login {
   private readonly dialog = inject(MatDialog);
   private readonly dialogRef = inject(MatDialogRef<this>);
   private readonly authService = inject(AuthService);
-  private readonly userService = inject(User);
   private readonly router = inject(Router);
   private readonly toaster = inject(HotToastService);
 
