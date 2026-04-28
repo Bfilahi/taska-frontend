@@ -8,7 +8,7 @@ import { ProjectsStatsDTO } from '../dto/projectsStatsDTO';
 import { ProjectStatsDTO } from '../dto/projectStatsDTO';
 
 
-interface GetResponseProjects {
+export interface GetResponseProjects {
   content: ProjectResponse[];
   size: number;
   number: number;
