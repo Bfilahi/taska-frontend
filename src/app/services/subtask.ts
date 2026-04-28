@@ -6,7 +6,7 @@ import { TaskResponse } from '../dto/taskResponse';
 import { SubtaskResponse } from '../dto/subtaskResponse';
 import { SubtaskRequest } from '../dto/subtaskRequest';
 
-interface GetResponseSubtasks {
+export interface GetResponseSubtasks {
   content: TaskResponse[];
   size: number;
   number: number;
