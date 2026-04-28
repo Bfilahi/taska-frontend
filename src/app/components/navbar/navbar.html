@@ -1,11 +1,11 @@
 <mat-toolbar class="border-b-1" [style.border-color]="'var(--mat-sys-secondary-container)'">
   <div class="w-full max-w-[1200px] flex items-center justify-between gap-3 mx-auto">
     @if (authService.isLoggedIn()) {
-    <button matIconButton (click)="utilityService.opened.set(!utilityService.opened())">
+    <button class="menu-btn" matIconButton (click)="utilityService.opened.set(!utilityService.opened())">
       <mat-icon fontIcon="menu"></mat-icon>
     </button>
     }
-    <button matIconButton class="ml-auto" (click)="utilityService.toggleTheme()">
+    <button matIconButton class="ml-auto theme-btn" (click)="utilityService.toggleTheme()">
       @if (utilityService.isDarkMode()) {
       <mat-icon fontIcon="dark_mode"></mat-icon>
       } @else {
@@ -14,10 +14,10 @@
     </button>
 
     @if (authService.isLoggedIn()) {
-    <button matButton="outlined" (click)="logout()">Logout</button>
+    <button class="logout-btn" matButton="outlined" (click)="logout()">Logout</button>
     } @else {
-    <button matButton="outlined" (click)="openSignUpDialog()">Sign Up</button>
-    <button matButton="filled" (click)="openLoginDialog()">Login</button>
+    <button class="signup-btn" matButton="outlined" (click)="openSignUpDialog()">Sign Up</button>
+    <button class="login-btn" matButton="filled" (click)="openLoginDialog()">Login</button>
     }
   </div>
 </mat-toolbar>
