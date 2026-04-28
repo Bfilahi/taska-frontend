@@ -169,4 +169,28 @@ describe('Navbar', () => {
     });
   });
 
+  describe('methods', () => {
+    it('should call dialog.open when openLoginDialog() is called', () => {
+      spyOn(dialog, 'open');
+
+      component.openLoginDialog();
+
+      expect(dialog.open).toHaveBeenCalled();
+    });
+
+    it('should call dialog.open when openSignUpDialog() is called', () => {
+      spyOn(dialog, 'open');
+
+      component.openSignUpDialog();
+
+      expect(dialog.open).toHaveBeenCalled();
+    });
+
+    it('should call authService.logout when logout() is called', () => {
+      component.logout();
+
+      expect(mockAuthService.logout).toHaveBeenCalled();
+    });
+  });
+
 });
