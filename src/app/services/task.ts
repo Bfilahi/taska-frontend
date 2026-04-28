@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { TaskRequest } from '../dto/taskRequest';
 
 
-interface GetResponseTasks {
+export interface GetResponseTasks {
   content: TaskResponse[];
   size: number;
   number: number;
