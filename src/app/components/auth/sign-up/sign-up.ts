@@ -83,3 +83,5 @@ export class SignUp {
     this.dialog.open(Login);
   }
 }
+
+
