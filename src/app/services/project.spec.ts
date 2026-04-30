@@ -47,10 +47,12 @@ describe('Project', () => {
           progress: 30,
         }
       ],
-      size: 3,
-      number: 2,
-      totalElements: 5,
-      totalPages: 4,
+      page: {
+        size: 3,
+        number: 2,
+        totalElements: 5,
+        totalPages: 4,
+      }
     }
 
     mockProjectsStatsDTO = {

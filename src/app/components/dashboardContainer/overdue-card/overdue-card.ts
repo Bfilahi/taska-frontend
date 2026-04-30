@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink } from '@angular/router';
-import { Project } from '../../../services/project';
+import { GetResponseProjects, Project } from '../../../services/project';
 import { ProjectResponse } from '../../../dto/projectResponse';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
@@ -42,7 +42,7 @@ export class OverdueCard implements OnInit {
     this.isLoading.set(true);
 
     this.projectService.getOverdueProjects(this.partialParams).subscribe({
-      next: (response: any) => {
+      next: (response: GetResponseProjects) => {
         this.projects.set(response.content);
         this.partialParams.page = response.page.number + 1;
         this.partialParams.size = response.page.size;

@@ -10,10 +10,12 @@ import { ProjectStatsDTO } from '../dto/projectStatsDTO';
 
 export interface GetResponseProjects {
   content: ProjectResponse[];
-  size: number;
-  number: number;
-  totalElements: number;
-  totalPages: number;
+  page: {
+    size: number;
+    number: number;
+    totalElements: number;
+    totalPages: number;
+  }
 }
 
 @Injectable({

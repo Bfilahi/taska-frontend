@@ -3,15 +3,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dashboard } from './dashboard';
 import { provideZonelessChangeDetection, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GetResponseProjects, Project } from '../../../services/project';
+import { Project } from '../../../services/project';
 import { User } from '../../../services/user';
 import { provideRouter } from '@angular/router';
 import { UserResponse } from '../../../dto/userResponse';
 import { ProjectsStatsDTO } from '../../../dto/projectsStatsDTO';
-import { NEVER, of } from 'rxjs';
+import { NEVER } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { Priority } from '../../../enum/priorityEnum';
-import { Status } from '../../../enum/statusEnum';
+import { NewProject } from '../../projectsContainer/new-project/new-project';
 
 describe('Dashboard', () => {
   let component: Dashboard;
@@ -23,7 +22,7 @@ describe('Dashboard', () => {
 
   let mockUserResponse: UserResponse;
   let mockProjectsStats: ProjectsStatsDTO;
-  let mockGetResponseProjects: GetResponseProjects;
+
 
   beforeEach(async () => {
     dialog = jasmine.createSpyObj(['open']);
@@ -77,25 +76,6 @@ describe('Dashboard', () => {
       overdueProjects: 1,
     };
 
-    mockGetResponseProjects = {
-      content: [
-        {
-          id: 1,
-          name: 'some project name',
-          description: 'some project description',
-          startDate: new Date(2025, 9, 3),
-          dueDate: new Date(2025, 10, 12),
-          priority: Priority.LOW,
-          status: Status.ACTIVE,
-          progress: 30,
-        }
-      ],
-      size: 3,
-      number: 2,
-      totalElements: 5,
-      totalPages: 4,
-    }
-
     fixture = TestBed.createComponent(Dashboard);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -136,6 +116,12 @@ describe('Dashboard', () => {
       btn.triggerEventHandler('click', null);
 
       expect(component.openNewProjectDialog).toHaveBeenCalled();
+    });
+
+    it('should open dialog when openNewProjectDialog is called', () => {
+      component.openNewProjectDialog();
+
+      expect(dialog.open).toHaveBeenCalledWith(NewProject);
     });
   });
 });
