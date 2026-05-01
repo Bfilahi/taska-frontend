@@ -4,9 +4,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
-import { SubtaskResponse } from '../../../../dto/subtaskResponse';
 import { ActivatedRoute } from '@angular/router';
-import { Subtask } from '../../../../services/subtask';
+import { GetResponseSubtasks, Subtask } from '../../../../services/subtask';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TaskResponse } from '../../../../dto/taskResponse';
 import { EditSubtask } from '../edit-subtask/edit-subtask';
@@ -43,7 +42,7 @@ export class SubtasksTable implements OnInit {
   private readonly toaster = inject(HotToastService);
 
   private taskId = signal<number>(0);
-  public subtasks = signal<SubtaskResponse[]>([]);
+  public subtasks = signal<TaskResponse[]>([]);
   public partialParams: { page: number; size: number } = {
     page: 1,
     size: 5,
@@ -122,7 +121,7 @@ export class SubtasksTable implements OnInit {
   private listSubtasks() {
     this.isLoading.set(true);
     this.subtaskService.getSubTasks(this.taskId(), this.partialParams).subscribe({
-      next: (response: any) => {
+      next: (response: GetResponseSubtasks) => {
         this.subtasks.set(response.content);
         this.partialParams.page = response.page.number + 1;
         this.partialParams.size = response.page.size;

@@ -7,11 +7,13 @@ import { SubtaskResponse } from '../dto/subtaskResponse';
 import { SubtaskRequest } from '../dto/subtaskRequest';
 
 export interface GetResponseSubtasks {
-  content: TaskResponse[];
-  size: number;
-  number: number;
-  totalElements: number;
-  totalPages: number;
+  content: TaskResponse[],
+  page: {
+    size: number;
+    number: number;
+    totalElements: number;
+    totalPages: number;
+  }
 }
 
 @Injectable({
