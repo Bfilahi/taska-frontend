@@ -14,7 +14,7 @@
       >
         {{ task()?.priority }}
       </span>
-      <p class="subtext">{{ task()?.description | titlecase }}</p>
+      <p class="subtext description">{{ task()?.description | titlecase }}</p>
       <hr class="text-black/20" />
       <div class="flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
@@ -32,7 +32,7 @@
         <div class="flex items-center gap-1">
           <mat-icon class="!text-sm !min-w-fit" fontIcon="calendar_today"></mat-icon>
           <div>
-            Due: <span>{{ task()?.dueDate }}</span>
+            Due: <span class="dueDate">{{ task()?.dueDate }}</span>
           </div>
         </div>
       </div>
