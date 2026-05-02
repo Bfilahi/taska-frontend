@@ -3,7 +3,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormFields } from '../../shared/form-fields/form-fields';
@@ -37,7 +37,7 @@ export class NewTask implements OnInit {
   private readonly dialogRef = inject(MatDialogRef<this>);
   private readonly toaster = inject(HotToastService);
 
-  public newTaskForm = new FormGroup({
+  public newTaskForm = new UntypedFormGroup({
     dueDate: new FormControl<Date | null>(null, [Validators.required, Util.dateMustBeAfterToday()]),
   });
 
@@ -57,7 +57,7 @@ export class NewTask implements OnInit {
   public onSubmit() {
     this.isLoading.set(true);
 
-    if(this.reusableFields && this.projectId()){
+    if (this.reusableFields && this.projectId()) {
       const reusableFieldValue = this.reusableFields.value;
 
       const request: TaskRequest = {
@@ -65,7 +65,7 @@ export class NewTask implements OnInit {
         description: reusableFieldValue.description,
         priority: reusableFieldValue.priority,
         dueDate: this.newTaskForm.value.dueDate!,
-        projectId: this.projectId()
+        projectId: this.projectId(),
       };
 
       this.taskService.addNewTask(request).subscribe({
@@ -79,10 +79,9 @@ export class NewTask implements OnInit {
           console.error(err);
           this.toaster.error(`Error: ${err.error.message}`);
           this.dialogRef.close(false);
-        }
+        },
       });
-    }
-    else{
+    } else {
       this.isLoading.set(false);
       console.error('Error: Form fields are missing');
       this.toaster.error('Error: Form fields are missing');
