@@ -35,7 +35,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 export class NewSubtask implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly subtaskService = inject(Subtask);
-  private readonly dialogReg = inject(MatDialogRef<this>);
+  private readonly dialogRef = inject(MatDialogRef<this>);
   private readonly toaster = inject(HotToastService);
 
   public isLoading = signal<boolean>(false);
@@ -72,7 +72,7 @@ export class NewSubtask implements OnInit {
       this.subtaskService.addNewSubtask(request).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.dialogReg.close();
+          this.dialogRef.close();
           this.toaster.success('New subtask was added successfully');
         },
         error: (err: HttpErrorResponse) => {
