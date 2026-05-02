@@ -7,12 +7,12 @@
       </mat-card-header>
       <mat-card-content>
         <div class="flex flex-col gap-3">
-          <p class="text-gray-500 font-light">
+          <p class="text-gray-500 font-light description">
             {{ project.description }}
           </p>
           <div class="flex items-center justify-between">
             <span
-              class="py-0.5 px-1 rounded-sm"
+              class="py-0.5 px-1 rounded-sm status"
               [style.color]="'var(--mat-sys-on-primary-fixed-variant)'"
               [style.background]="
                 project.status === active
@@ -24,6 +24,7 @@
             </span>
             <span>
               <span
+                class="priority"
                 [style.color]="
                   project.priority === low
                     ? 'var(--mat-extended-custom-color1-color-container)'
@@ -40,7 +41,7 @@
           <div class="flex flex-col gap-2">
             <div class="flex items-center justify-between text-gray-500">
               <small>Progress</small>
-              <small>{{ project.progress }}%</small>
+              <small class="progress">{{ project.progress }}%</small>
             </div>
             <mat-progress-bar mode="determinate" value="{{ project.progress }}"></mat-progress-bar>
           </div>
