@@ -104,7 +104,7 @@
 
 
   @if(overdueTasks().length <= 0){
-  <p [style.color]="'var(--mat-sys-error2-container)'" class="mt-4 text-center">Table is empty.</p>
+  <p [style.color]="'var(--mat-sys-error2-container)'" class="mt-4 text-center empty">Table is empty.</p>
   } @else{
   <mat-paginator
     class="mx-auto mt-7 w-fit"

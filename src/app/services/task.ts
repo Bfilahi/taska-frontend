@@ -8,10 +8,12 @@ import { TaskRequest } from '../dto/taskRequest';
 
 export interface GetResponseTasks {
   content: TaskResponse[];
-  size: number;
-  number: number;
-  totalElements: number;
-  totalPages: number;
+  page: {
+    size: number;
+    number: number;
+    totalElements: number;
+    totalPages: number;
+  }
 }
 
 @Injectable({

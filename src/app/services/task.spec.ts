@@ -46,10 +46,12 @@ describe('Task', () => {
           subtasks: 3,
         }
       ],
-      size: 4,
-      number: 3,
-      totalElements: 10,
-      totalPages: 7,
+      page: {
+        size: 4,
+        number: 3,
+        totalElements: 10,
+        totalPages: 7,
+      }
     };
 
     mockTaskResponse = {

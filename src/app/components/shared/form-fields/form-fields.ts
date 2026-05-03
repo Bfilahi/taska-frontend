@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Util } from '../../../dto/util';
-import { Priority } from '../../../enum/priorityEnum';
 
 
 @Component({
