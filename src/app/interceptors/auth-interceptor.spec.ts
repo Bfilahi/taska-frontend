@@ -5,6 +5,8 @@ import { authInterceptor } from './auth-interceptor';
 import { AuthService } from '../services/auth-service';
 import { environment } from '../../environments/environment.development';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { of } from 'rxjs';
+
 
 describe('authInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) => 
@@ -33,7 +35,7 @@ describe('authInterceptor', () => {
 
     const next: HttpHandlerFn = jasmine.createSpy().and.callFake((request) => {
       expect(request.headers.has('Authorization')).toBeFalse();
-      return null;
+      return of({} as any);
     });
 
     interceptor(req, next);
@@ -45,7 +47,7 @@ describe('authInterceptor', () => {
 
     const next: HttpHandlerFn = jasmine.createSpy().and.callFake((request) => {
       expect(request.headers.get('Authorization')).toBe('Bearer mock-token');
-      return null;
+      return of({} as any);
     });
 
     interceptor(req, next);
@@ -57,7 +59,7 @@ describe('authInterceptor', () => {
 
     const next: HttpHandlerFn = jasmine.createSpy().and.callFake((request) => {
       expect(request.headers.has('Authorization')).toBeFalse();
-      return null;
+      return of({} as any);
     });
 
     interceptor(req, next);
